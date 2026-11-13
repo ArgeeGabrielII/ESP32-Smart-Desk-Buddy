@@ -1,5 +1,7 @@
 # Hardware and wiring
 
+See the [visual wiring diagram](wiring-diagram.md) alongside the connection table below.
+
 ## Confirm your parts
 
 This is a proposed wiring plan, pending a physical check of your parts:
