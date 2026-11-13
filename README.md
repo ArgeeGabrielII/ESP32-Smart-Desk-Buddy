@@ -25,6 +25,6 @@ The active buzzer is an optional later addition, pending its voltage/current spe
 
 ## Status
 
-Documentation and proposed wiring are ready. The photo confirms the obstacle module's OUT/GND/VCC labels. Its 3.3 V compatibility and detection polarity still need confirmation from the actual module or its documentation. Firmware and physical testing are pending.
+Documentation and proposed wiring are ready. The photo confirms the obstacle module's OUT/GND/VCC labels. Its 3.3 V compatibility and detection polarity still need confirmation from the actual module or its documentation. A standalone [LED test sketch](firmware/led_test/led_test.ino) is available; follow the [upload instructions](docs/setup/getting-started.md#test-the-leds-first). Compilation, physical testing, and sensor-driven firmware are pending.
 
 This project replaces the earlier Desk Buddy idea. We are reusing the existing [GitHub repository](https://github.com/ArgeeGabrielII/ESP32-Smart-Desk-Buddy); its repository name has not changed.
