@@ -1,12 +1,11 @@
 # Documentation
 
-Keep the first build small: one sensor, one display, and one loop that connects them.
-
 | Category | Guide | Purpose |
 | --- | --- | --- |
-| Setup | [Getting started](setup/getting-started.md) | Prepare Arduino IDE, board support, and libraries. |
-| Hardware | [Wiring](hardware/wiring.md) | Confirm the modules and connect the first build. |
-| Hardware | [Wiring diagram](hardware/wiring-diagram.md) | See the power and signal connections. |
-| Workshop | [Session guide](workshop/session-guide.md) | Run the brownbag and check the result. |
+| Hardware | [Electronics list](hardware/electronics-list.md) | Gather the parts for the first build. |
+| Hardware | [Visual diagram](hardware/wiring-diagram.md) | See the proposed power, sensor, and LED connections. |
+| Hardware | [Wiring](hardware/wiring.md) | Check module compatibility and connect the circuit. |
+| Setup | [Getting started](setup/getting-started.md) | Prepare Arduino IDE and ESP32 board support. |
+| Workshop | [Session guide](workshop/session-guide.md) | Run a simple hands-on brownbag. |
 
-Read in that order. Return to the [project README](../README.md) for the scope and parts list.
+The active project is the Mini Parking Assistant. Earlier Desk Buddy documentation is available in Git history.

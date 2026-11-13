@@ -1,44 +1,30 @@
-# ESP32 Smart Desk Buddy
+# ESP32 Mini Parking Assistant
 
-A beginner-friendly brownbag project: build a small desk display that shows temperature and humidity using an ESP32, a DHT11 sensor, and an OLED.
+A simple brownbag project: detect a nearby object and switch between a green and a red LED.
+
+- **No obstacle detected:** green LED on, red LED off.
+- **Obstacle detected:** red LED on, green LED off.
+
+The infrared obstacle avoidance module provides a digital detection signal. This project does not measure distance in centimeters. Detection depends on the object's reflectivity, lighting, and module adjustment.
 
 ## First build
 
-Read the DHT11 about every two seconds and show temperature in Celsius and relative humidity on the OLED. Print readings to the Serial Monitor for debugging. If a reading fails, show a clear sensor error instead of a misleading value.
+Use an ESP32, an obstacle avoidance module, two LEDs, and two 1 kΩ resistors. Power the assembled project over USB after checking the wiring and module compatibility.
 
-Example display (illustrative values):
+The active buzzer is an optional later addition, pending its voltage/current specification and driver requirements. The first build uses visual feedback only.
 
-```text
-DESK BUDDY
-Temp:     28 C
-Humidity: 65 %
-```
+## Documentation
 
-The first build uses USB power and runs locally. Motion sensing, light sensing, LEDs, buzzers, relays, and Wi-Fi are future extensions.
+1. [Electronics list](docs/hardware/electronics-list.md)
+2. [Visual wiring diagram](docs/hardware/wiring-diagram.md)
+3. [Wiring instructions](docs/hardware/wiring.md)
+4. [Software setup](docs/setup/getting-started.md)
+5. [Brownbag session guide](docs/workshop/session-guide.md)
 
-## Parts
+![Proposed Mini Parking Assistant wiring](docs/hardware/assets/mini-parking-wiring.png)
 
-| Part | Quantity |
-| --- | --- |
-| ESP32 development board | 1 |
-| DHT11 temperature and humidity module | 1 |
-| 0.96-inch OLED | 1 |
-| 830-point breadboard | 1 |
-| Jumper wires | As needed |
-| Micro USB data cable | 1 |
+## Status
 
-Confirm the board model and OLED interface/controller before following the wiring guide. Screen size alone does not identify the display.
+Documentation and proposed wiring are ready. The photo confirms the obstacle module's OUT/GND/VCC labels. Its 3.3 V compatibility and detection polarity still need confirmation from the actual module or its documentation. Firmware and physical testing are pending.
 
-## Start here
-
-1. Follow the [software setup guide](docs/setup/getting-started.md).
-2. Check your modules and follow the [hardware guide](docs/hardware/wiring.md).
-3. Use the [brownbag session guide](docs/workshop/session-guide.md).
-
-See the [documentation index](docs/README.md) for the categories.
-
-## Project status
-
-Documentation comes first. Firmware, compilation checks, and physical hardware validation are still to come. The example screen describes the intended result.
-
-Repository: [ESP32 Smart Desk Buddy](https://github.com/ArgeeGabrielII/ESP32-Smart-Desk-Buddy)
+This project replaces the earlier Desk Buddy idea. We are reusing the existing [GitHub repository](https://github.com/ArgeeGabrielII/ESP32-Smart-Desk-Buddy); its repository name has not changed.

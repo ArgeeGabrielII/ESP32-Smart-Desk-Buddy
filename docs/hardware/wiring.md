@@ -1,43 +1,45 @@
 # Hardware and wiring
 
-See the [visual wiring diagram](wiring-diagram.md) alongside the connection table below.
+Start with the [electronics list](electronics-list.md) and [visual diagram](wiring-diagram.md).
 
-## Confirm your parts
+## Confirm the obstacle module first
 
-This is a proposed wiring plan, pending a physical check of your parts:
+The ESP32 photo shows board labels D25, D26, and D27, which correspond to GPIO 25, 26, and 27.
 
-- A classic ESP32 development board with exposed GPIO 4, 21, and 22.
-- A four-pin I2C OLED labeled GND, VCC, SCL, and SDA, with an SSD1306 controller and 128 × 64 resolution.
-- A DHT11 breakout module with power, ground, and data pins.
-- Sensor and display modules rated to operate from 3.3 V.
+The supplied photo confirms the obstacle module header order: with the sensor components facing you and the pins pointing down, **OUT, GND, VCC** run left to right. This plan assumes it supports **3.3 V power** and has a **3.3 V-compatible digital output**. Check its printed labels and exact product specifications before connecting power or OUT. Do not assume the order of VCC, GND, and OUT from another module's photo. If there is also an AO pin, leave AO disconnected.
 
-The supplied parts list does not confirm those details. Check labels and the seller's specifications first. If the board or modules differ, adjust this guide before connecting them. A 0.96-inch OLED may have a different controller or interface.
+Some infrared modules support 3.3–5 V, but that does not establish the rating of yours. If your module requires 5 V, stop and revise the circuit with appropriate signal interfacing; do not apply a 5 V output to the ESP32 input.
 
-## Connect the first build
+References: [Waveshare's example infrared module](https://www.waveshare.com/wiki/Infrared_Proximity_Sensor) illustrates model-specific ratings; [Espressif's ESP32 datasheet](https://documentation.espressif.com/esp32_datasheet_en.html) documents GPIO electrical limits.
 
-Unplug USB while wiring. Use the module's printed pin labels, not its physical pin order. ESP32 GPIO signals must stay at 3.3 V; do not connect a 5 V signal to a GPIO.
+## Wire with USB unplugged
 
-| Module pin | ESP32 connection |
+1. Keep the ESP32 beside the breadboard so its headers remain accessible.
+2. Connect ESP32 **3V3** to a red + rail and **GND** to a blue − rail. Use one continuous section of each rail; some rails are split. Keep the two rails separate.
+3. After confirming the sensor's labels and ratings, connect it using the table below.
+4. Wire each LED with its own 1 kΩ series resistor.
+
+| Connection | Destination |
 | --- | --- |
-| DHT11 VCC / + | 3V3 |
-| DHT11 GND / − | GND |
-| DHT11 DATA / S / OUT | GPIO 4 |
-| OLED VCC | 3V3 |
-| OLED GND | GND |
-| OLED SDA | GPIO 21 |
-| OLED SCL | GPIO 22 |
+| Sensor VCC / + | Breadboard + rail (3.3 V), only after compatibility is confirmed |
+| Sensor GND / − | Breadboard − rail (GND) |
+| Sensor OUT / DO / DOUT | ESP32 D27 (GPIO 27) |
+| ESP32 D25 (GPIO 25) | 1 kΩ resistor → green LED anode (+) |
+| Green LED cathode (−) | GND rail |
+| ESP32 D26 (GPIO 26) | 1 kΩ resistor → red LED anode (+) |
+| Red LED cathode (−) | GND rail |
 
-Use the breadboard to share 3V3 and GND. Check whether the power rails are split before relying on them. GPIO numbers refer to the board's GPIO labels, not a header pin's position.
+On an untrimmed typical LED, the longer lead is the anode. The shorter lead and the flat edge of the body usually identify the cathode. Check the LED's markings if its leads were trimmed.
 
-Many DHT11 breakout modules include a data pull-up resistor. Check your module; if it lacks one and its documentation calls for it, use a 10 kΩ resistor between DATA and 3V3. A bare four-pin DHT11 sensor needs its own pinout and wiring check.
+Each five-hole group a–e in a numbered breadboard row is connected internally; f–j is a separate group. The center gap separates these groups. Put the LED's two legs in different connected groups so they are not shorted together. The resistor must be in series between the GPIO and the LED anode.
 
-This plan uses GPIO 21 and 22 for I2C, matching the generic classic ESP32 defaults. Other ESP32 boards can differ. See [Espressif's I2C documentation](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/i2c.html).
+## Before connecting USB
 
-## Check before powering on
+- Verify the module's labels, voltage rating, and output compatibility.
+- Trace both LED circuits and confirm there is a resistor in each.
+- Check that no 3V3-to-GND short exists and all grounds are shared.
+- Leave the buzzer disconnected.
 
-1. Verify the modules support 3.3 V operation and check every power and ground connection.
-2. Make sure 3V3 and GND are not shorted.
-3. Confirm the OLED controller and resolution. Use its documentation or an I2C scanner to find the address; do not assume the address from the screen size.
-4. Reconnect USB only after the wiring checks pass.
+After firmware is available, observe the sensor output with and without an object to establish its detection polarity. Many modules detect with LOW, but the code must match your actual module. Adjust the sensor potentiometer gently to demonstrate the detection threshold; do not treat it as a calibrated distance setting.
 
-Leave the other sensors and outputs disconnected for the first build. The assembled circuit and pin plan still need hardware validation.
+This is a proposed circuit. It has not been tested on the actual components.
