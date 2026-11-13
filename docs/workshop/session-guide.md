@@ -11,7 +11,7 @@ With one kit, use a shared live build and let participants take turns changing c
 - Gather the [electronics](../hardware/electronics-list.md).
 - Confirm the sensor model, pin labels, voltage support, and output polarity.
 - Complete the [wiring checks](../hardware/wiring.md).
-- Once firmware exists, test it on the actual parts and prepare starter and complete sketches.
+- Use the [LED test](../../firmware/led_test/led_test.ino), then the [parking assistant sketch](../../firmware/parking_assistant/parking_assistant.ino). Verify sensor behavior on the actual parts before the session.
 
 ## Agenda
 
@@ -36,4 +36,4 @@ Read GPIO 27, interpret the sensor's actual detection polarity, then turn on exa
 - Each LED has a separate 1 kΩ resistor.
 - No unconfirmed buzzer is connected.
 
-Discuss how surface color, angle, and lighting change detection. Consider an audible alert only after confirming the buzzer's electrical requirements and driver circuit.
+Discuss how surface color, angle, and lighting change detection. The project uses visual indicators only; keep the buzzer disconnected.

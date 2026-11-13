@@ -54,7 +54,7 @@ final class WiringView: NSView {
         text("One 1 kΩ resistor per LED. Put LED legs in separate breadboard groups.",60,1295,27,nil,true)
         text("Breadboard + rail = 3.3 V; − rail = common GND. Keep the rails separate.",60,1345,26)
         text("USB unplugged while wiring. Buzzer stays disconnected for this first build.",60,1395,26,nil,true)
-        text("Green = clear; red = obstacle. Firmware and hardware validation are pending.",60,1445,25)
+        text("Green = clear; red = obstacle. Verify sensor detection with the new sketch.",60,1445,25)
     }
 }
 let view=WiringView(frame:NSRect(x:0,y:0,width:1520,height:1510))

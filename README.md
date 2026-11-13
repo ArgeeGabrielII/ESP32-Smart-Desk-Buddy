@@ -11,7 +11,7 @@ The infrared obstacle avoidance module provides a digital detection signal. This
 
 Use an ESP32, an obstacle avoidance module, two LEDs, and two 1 kΩ resistors. Power the assembled project over USB after checking the wiring and module compatibility.
 
-The active buzzer is an optional later addition, pending its voltage/current specification and driver requirements. The first build uses visual feedback only.
+This project uses LEDs only. Leave the buzzer disconnected.
 
 ## Documentation
 
@@ -25,6 +25,10 @@ The active buzzer is an optional later addition, pending its voltage/current spe
 
 ## Status
 
-Documentation and proposed wiring are ready. The photo confirms the obstacle module's OUT/GND/VCC labels. Its 3.3 V compatibility and detection polarity still need confirmation from the actual module or its documentation. A standalone [LED test sketch](firmware/led_test/led_test.ino) is available; follow the [upload instructions](docs/setup/getting-started.md#test-the-leds-first). Compilation, physical testing, and sensor-driven firmware are pending.
+The user confirmed that the [LED test](firmware/led_test/led_test.ino) works on the assembled board. The [parking assistant sketch](firmware/parking_assistant/parking_assistant.ino) now reads the sensor and controls the LEDs; follow the [upload instructions](docs/setup/getting-started.md#run-the-parking-assistant).
+
+The sensor photo confirms OUT/GND/VCC labels. Its operation at 3.3 V and detection polarity still need verification on the actual module. The firmware defaults to active-LOW detection and provides a polarity setting. No buzzer is used.
+
+The parking assistant sketch compiles successfully for **ESP32 Dev Module** with Espressif board package **3.3.12**. Sensor hardware validation is pending.
 
 This project replaces the earlier Desk Buddy idea. We are reusing the existing [GitHub repository](https://github.com/ArgeeGabrielII/ESP32-Smart-Desk-Buddy); its repository name has not changed.

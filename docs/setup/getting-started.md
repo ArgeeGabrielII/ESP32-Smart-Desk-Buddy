@@ -22,13 +22,22 @@ Use [firmware/led_test/led_test.ino](../../firmware/led_test/led_test.ino) befor
 
 If a light does not match, unplug USB before adjusting wiring. Check polarity, resistor placement, GPIO labels, and common ground. Keep both series resistors installed.
 
-This standalone sketch uses `delay()` for simplicity and does not read GPIO 27. It has not yet been compiled with the ESP32 toolchain or tested on the physical board.
+This standalone sketch uses `delay()` for simplicity and does not read GPIO 27. The user confirmed that the red and green LED blink test works on the assembled board.
 
 Reference: [Espressif's Arduino GPIO API](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/gpio.html).
 
-## Planned parking assistant firmware
+## Run the parking assistant
 
-The sensor-driven sketch is still to come. It will use:
+Open [firmware/parking_assistant/parking_assistant.ino](../../firmware/parking_assistant/parking_assistant.ino) instead of the LED test. Keep the file in its `parking_assistant` folder.
+
+1. Unplug USB. Connect sensor VCC to 3V3, GND to shared ground, and OUT to D27 using the [wiring guide](../hardware/wiring.md). Keep the two LED circuits connected.
+2. Reconnect USB and upload using **ESP32 Dev Module** and the same working port. No extra libraries are required.
+3. Hold an object in front of the sensor: red should turn on and green should turn off. Remove the object: green should turn on and red should turn off.
+4. Open Serial Monitor at **115200 baud** to see `OUT=LOW/HIGH` and the interpreted state. Messages print at startup and on stable state changes.
+5. If the LEDs consistently show the opposite of the object's presence, change `OBSTACLE_LEVEL` from `LOW` to `HIGH`, then upload again.
+6. If the sensor stays in one state, adjust its potentiometer gently while moving an object in and out of view. If still stuck, unplug USB and check OUT/D27, module power, and common ground. Reversing polarity will not fix an input that never changes.
+
+The sensor sketch uses these settings:
 
 | Setting | Value |
 | --- | --- |
@@ -36,9 +45,11 @@ The sensor-driven sketch is still to come. It will use:
 | Green LED output | GPIO 25 |
 | Red LED output | GPIO 26 |
 | Serial baud rate | 115200 |
-| Detection polarity | Confirm against the actual sensor |
+| Detection polarity | Active LOW by default; configurable with `OBSTACLE_LEVEL` |
 
-The program will read the sensor, select the detected/clear state, and update the two LEDs. Brief filtering can prevent flickering near the detection threshold. Record working IDE and ESP32 package versions after the first successful run.
+The program accepts a state after 50 ms of stable input, using `millis()` rather than a blocking delay. Both LEDs stay off during initial settling; then exactly one lights. A disconnected signal can appear clear because of the input pull-up; green does not diagnose sensor health. Sensor behavior on the actual hardware still needs verification. Record working IDE and ESP32 package versions after the first successful run.
+
+Compilation passed using **esp32 by Espressif Systems 3.3.12**, board `esp32:esp32:esp32`: 272,120 bytes of program storage and 22,124 bytes of global variables. This confirms compilation; the sensor sketch has not been uploaded or physically tested by the assistant.
 
 ## Troubleshooting
 

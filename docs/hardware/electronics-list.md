@@ -19,13 +19,9 @@ Use female-to-male jumpers for male board/module headers to breadboard connectio
 
 Use the 1 kΩ resistors for this first build. Resistors have no polarity. Every LED needs its own series resistor.
 
-## Optional later
+## Parts not used
 
-| Component | Quantity | Condition |
-| --- | --- | --- |
-| Active buzzer | 1 | Confirm whether it is a bare buzzer or a driver module, its voltage, and its current before drawing its circuit. |
-
-A bare active buzzer may need a transistor driver and possibly other protection components, which are not confirmed in the kit. Do not connect an unidentified buzzer directly to an ESP32 GPIO. It is not wired in the first-build diagram.
+The project uses LEDs only. Leave both buzzers disconnected.
 
 The OLED, DHT11, PIR sensor, relays, and remaining kit parts are not needed for this build.
 
