@@ -1,5 +1,9 @@
 # Wiring diagram
 
+![ESP32, OLED, and DHT11 wiring connections](assets/wiring-connections.png)
+
+The image reflects the pin labels visible in the supplied photos. The DHT11 center pin is left unconnected until its power label is confirmed. Module voltage ratings and the OLED controller still need confirmation. The complete plan below includes the DHT power connection only after those checks.
+
 This diagram shows electrical connections, not the physical position or order of pins. Match the printed pin labels on your modules.
 
 **Unplug USB before wiring.** This plan assumes a classic ESP32 with GPIO 4, 21, and 22, a four-pin I2C OLED, and a three-pin DHT11 module. Confirm both modules support 3.3 V power. See the [hardware guide](wiring.md) for module checks and pull-up resistor details.
